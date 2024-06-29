@@ -13,3 +13,10 @@
 .externalNativeBuild
 .cxx
 local.properties
+.idea
+#built application files
+*.apk
+*.ap_
+*.aab
+# Obfuscation related
+app/out.map
