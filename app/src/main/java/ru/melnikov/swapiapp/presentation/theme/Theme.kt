@@ -1,4 +1,4 @@
-package ru.melnikov.swapiapp.ui.theme
+package ru.melnikov.swapiapp.presentation.theme
 
 import android.app.Activity
 import android.os.Build

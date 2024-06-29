@@ -1,4 +1,4 @@
-package ru.melnikov.swapiapp.ui.theme
+package ru.melnikov.swapiapp.presentation.theme
 
 import androidx.compose.ui.graphics.Color
 
