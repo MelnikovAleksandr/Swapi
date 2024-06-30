@@ -71,6 +71,9 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
+    // Check Internet
+    implementation(libs.konnectivity)
+
     // Gson
     implementation (libs.gson)
 
@@ -104,6 +107,7 @@ dependencies {
 
     // Room
     implementation (libs.androidx.room.runtime)
+    implementation (libs.androidx.room.ktx)
     annotationProcessor (libs.androidx.room.compiler)
     ksp (libs.androidx.room.compiler)
 

@@ -2,22 +2,20 @@ package ru.melnikov.swapiapp.presentation.components
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.SwipeRefreshState
-import ru.melnikov.swapiapp.domain.models.Film
+import ru.melnikov.swapiapp.domain.models.Person
 
 @Composable
-fun MainFilmsContent(
+fun MainPeopleContent(
     modifier: Modifier = Modifier,
     onRefreshSwipe: (Boolean) -> Unit,
     swipeRefreshState: SwipeRefreshState,
-    searchTitle: String,
-    films: List<Film>,
-    onFilmClick: (List<Int>, String, Int) -> Unit
+    people: List<Person>,
+    onItemClick: (Int) -> Unit
 ) {
 
     SwipeRefresh(
@@ -31,21 +29,11 @@ fun MainFilmsContent(
         LazyColumn(
             modifier = modifier.fillMaxSize()
         ) {
-            items(items = films.filter { film ->
-                val keywords = searchTitle.lowercase().split(" ")
-                keywords.all { keyword ->
-                    film.title.contains(
-                        keyword,
-                        ignoreCase = true
-                    )
-                }
-            }, key = { film -> film.id }) { film ->
-                FilmItem(
+            items(items = people, key = { person -> person.id }) { person ->
+                PersonItem(
                     modifier = Modifier.animateItem(),
-                    film = film,
-                    onFilmClick = { people, title ->
-                        onFilmClick(people, title, film.id)
-                    }
+                    person = person,
+                    onItemClick = onItemClick
                 )
             }
         }

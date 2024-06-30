@@ -8,7 +8,7 @@ fun NavHostController.popUp() {
         this.popBackStack()
 }
 
-fun NavHostController.navigate(route: Any) {
+fun NavHostController.navigateTo(route: Any) {
     this.navigate(route) {
         launchSingleTop = true
     }
