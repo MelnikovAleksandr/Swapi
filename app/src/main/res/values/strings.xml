@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">SwapiApp</string>
+
+    <string name="update">Reload</string>
+    <string name="empty_data">Sorry, there are no data available for your request on the server. Please try again later.</string>
+
+    <string name="release_year">release year %1\$s</string>
+    <string name="director">director: </string>
+    <string name="producer">producer: </string>
+
+
+    <string name="http_400_errors">Incorrect request.</string>
+    <string name="http_429_error">The request limit has been exceeded, try again in a minute.</string>
+    <string name="http_500_errors">Server is not responding.</string>
+    <string name="http_timeout_error">Response time out, please repeat later.</string>
+    <string name="http_missing_error">Response missing connection, please repeat later.</string>
+    <string name="http_network_error">Network error, please repeat later.</string>
+    <string name="http_unknown_error">Connection error, check internet connection and try again.</string>
+
 </resources>
