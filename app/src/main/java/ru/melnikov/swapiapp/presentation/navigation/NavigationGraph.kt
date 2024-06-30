@@ -7,6 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import ru.melnikov.swapiapp.presentation.screens.FilmsScreen
+import ru.melnikov.swapiapp.presentation.screens.PeopleScreen
 
 @Composable
 fun NavigationGraph() {
@@ -20,11 +21,23 @@ fun NavigationGraph() {
     ) {
 
         composable<Routes.FilmsScreen> {
-            FilmsScreen()
+            FilmsScreen(
+                navigateToPersons = { people, title, id ->
+                    navController.navigateTo(
+                        Routes.PeopleScreen(
+                            people, title, id
+                        )
+                    )
+                }
+            )
         }
 
         composable<Routes.PeopleScreen> {
-
+            PeopleScreen(
+                navigateBack = {
+                    navController.popUp()
+                }
+            )
         }
 
         composable<Routes.PlanetsScreen> {

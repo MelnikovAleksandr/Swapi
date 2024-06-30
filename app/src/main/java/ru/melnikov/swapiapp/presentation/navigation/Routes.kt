@@ -8,8 +8,9 @@ sealed class Routes {
 
     @Serializable
     data class PeopleScreen(
-        val personId: Int,
-        val peopleIds: List<Int>
+        val peopleIds: List<Int>,
+        val filmTitle: String,
+        val filmId: Int
     ) : Routes()
 
     @Serializable

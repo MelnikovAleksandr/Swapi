@@ -60,4 +60,8 @@ class FilmsViewModel(
             }
         }
     }
+
+    fun onFilmClick(peopleIds: List<Int>, filmTitle: String, filmId: Int) = intent {
+        postSideEffect(FilmsSideEffects.NavigateToPersons(peopleIds, filmTitle, filmId))
+    }
 }

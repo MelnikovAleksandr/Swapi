@@ -10,8 +10,8 @@ import ru.melnikov.swapiapp.data.local.entity.FilmEntity
 interface FilmDao {
 
     @Query("SELECT * FROM films ORDER BY id ASC")
-    fun getLocalFilms(): List<FilmEntity>
+    suspend fun getLocalFilms(): List<FilmEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertFilms(films: List<FilmEntity>): List<Long>
+    suspend fun insertFilms(films: List<FilmEntity>): List<Long>
 }

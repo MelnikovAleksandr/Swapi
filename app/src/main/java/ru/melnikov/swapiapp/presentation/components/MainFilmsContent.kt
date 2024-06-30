@@ -16,7 +16,8 @@ fun MainFilmsContent(
     onRefreshSwipe: (Boolean) -> Unit,
     swipeRefreshState: SwipeRefreshState,
     searchTitle: String,
-    films: List<Film>
+    films: List<Film>,
+    onFilmClick: (List<Int>, String, Int) -> Unit
 ) {
 
     SwipeRefresh(
@@ -42,7 +43,9 @@ fun MainFilmsContent(
                 FilmItem(
                     modifier = Modifier.animateItem(),
                     film = film,
-                    onFilmClick = { _, _ -> }
+                    onFilmClick = { people, title ->
+                        onFilmClick(people, title, film.id)
+                    }
                 )
             }
         }

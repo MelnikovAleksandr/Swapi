@@ -8,6 +8,12 @@
     <string name="director">director: </string>
     <string name="producer">producer: </string>
 
+    <string name="birth_year">Birth Year: </string>
+    <string name="gender">gender: </string>
+    <string name="non_gender">N/A</string>
+    <string name="male_gender">Male</string>
+    <string name="female_gender">Female</string>
+
 
     <string name="http_400_errors">Incorrect request.</string>
     <string name="http_429_error">The request limit has been exceeded, try again in a minute.</string>
