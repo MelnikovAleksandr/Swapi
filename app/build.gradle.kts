@@ -71,6 +71,9 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
+    // Check Internet
+    implementation(libs.konnectivity)
+
     // Gson
     implementation (libs.gson)
 

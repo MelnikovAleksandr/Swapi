@@ -26,6 +26,7 @@ import org.orbitmvi.orbit.compose.collectSideEffect
 import ru.melnikov.swapiapp.R
 import ru.melnikov.swapiapp.presentation.components.EmptyContent
 import ru.melnikov.swapiapp.presentation.components.MainPlanetContent
+import ru.melnikov.swapiapp.presentation.components.NoInternetDialog
 import ru.melnikov.swapiapp.presentation.components.PlanetLoader
 import ru.melnikov.swapiapp.presentation.components.TopBar
 import ru.melnikov.swapiapp.presentation.state.PlanetSideEffects
@@ -83,6 +84,8 @@ fun PlanetScreenContent(
             SnackbarHost(snackbarHostState)
         }
     ) { paddingValues ->
+
+        NoInternetDialog()
 
         Column(
             Modifier

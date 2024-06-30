@@ -26,6 +26,7 @@ import org.orbitmvi.orbit.compose.collectSideEffect
 import ru.melnikov.swapiapp.R
 import ru.melnikov.swapiapp.presentation.components.EmptyContent
 import ru.melnikov.swapiapp.presentation.components.MainPeopleContent
+import ru.melnikov.swapiapp.presentation.components.NoInternetDialog
 import ru.melnikov.swapiapp.presentation.components.ShimmerCardItem
 import ru.melnikov.swapiapp.presentation.components.TopBar
 import ru.melnikov.swapiapp.presentation.state.PeopleSideEffects
@@ -97,6 +98,8 @@ fun PeopleScreenContent(
             SnackbarHost(snackbarHostState)
         }
     ) { paddingValues ->
+
+        NoInternetDialog()
 
         Column(
             Modifier

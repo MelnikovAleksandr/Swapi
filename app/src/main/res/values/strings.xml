@@ -28,5 +28,6 @@
     <string name="http_missing_error">Response missing connection, please repeat later.</string>
     <string name="http_network_error">Network error, please repeat later.</string>
     <string name="http_unknown_error">Connection error, check internet connection and try again.</string>
+    <string name="no_internet">Check internet connection!</string>
 
 </resources>
