@@ -14,5 +14,6 @@ fun PersonEntity?.toPerson() =
             "male" -> Gender.MALE
             "female" -> Gender.FEMALE
             else -> Gender.NON
-        }
+        },
+        homeWorld = this?.homeWorld ?: 0
     )

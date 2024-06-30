@@ -11,5 +11,6 @@ data class PersonEntity(
     val urlId: Int = 0,
     val name: String = "",
     val gender: String = "",
-    val birthYear: String = ""
+    val birthYear: String = "",
+    val homeWorld: Int = 0
 )

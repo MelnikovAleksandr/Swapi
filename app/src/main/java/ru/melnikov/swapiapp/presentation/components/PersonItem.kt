@@ -18,13 +18,14 @@ import ru.melnikov.swapiapp.domain.models.Person
 @Composable
 fun PersonItem(
     modifier: Modifier = Modifier,
-    person: Person
+    person: Person,
+    onItemClick: (Int) -> Unit
 ) {
 
     Card(
         modifier = modifier.padding(4.dp),
         onClick = {
-
+            onItemClick(person.homeWorld)
         }) {
         Row(
             modifier = Modifier

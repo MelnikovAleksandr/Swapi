@@ -14,7 +14,8 @@ fun MainPeopleContent(
     modifier: Modifier = Modifier,
     onRefreshSwipe: (Boolean) -> Unit,
     swipeRefreshState: SwipeRefreshState,
-    people: List<Person>
+    people: List<Person>,
+    onItemClick: (Int) -> Unit
 ) {
 
     SwipeRefresh(
@@ -29,7 +30,11 @@ fun MainPeopleContent(
             modifier = modifier.fillMaxSize()
         ) {
             items(items = people, key = { person -> person.id }) { person ->
-                PersonItem(modifier = Modifier.animateItem(), person = person)
+                PersonItem(
+                    modifier = Modifier.animateItem(),
+                    person = person,
+                    onItemClick = onItemClick
+                )
             }
         }
     }

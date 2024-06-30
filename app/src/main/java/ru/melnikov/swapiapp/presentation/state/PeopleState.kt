@@ -11,7 +11,7 @@ data class PeopleState(
 )
 
 sealed class PeopleSideEffects {
-    data object NavigateToPlanet : PeopleSideEffects()
+    data class NavigateToPlanet(val planetId: Int) : PeopleSideEffects()
     data object NavigateBack : PeopleSideEffects()
     data class ShowError(val text: String) : PeopleSideEffects()
 }

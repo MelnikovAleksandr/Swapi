@@ -10,5 +10,7 @@ data class PersonDto(
     @SerializedName("gender")
     val gender: String?,
     @SerializedName("birth_year")
-    val birthYear: String?
+    val birthYear: String?,
+    @SerializedName("homeworld")
+    val homeWorld: String?
 )

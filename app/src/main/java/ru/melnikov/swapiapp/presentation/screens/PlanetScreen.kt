@@ -8,6 +8,8 @@ import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
@@ -18,41 +20,33 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import com.google.accompanist.swiperefresh.SwipeRefreshState
-import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 import org.orbitmvi.orbit.compose.collectSideEffect
 import ru.melnikov.swapiapp.R
 import ru.melnikov.swapiapp.presentation.components.EmptyContent
-import ru.melnikov.swapiapp.presentation.components.MainPeopleContent
-import ru.melnikov.swapiapp.presentation.components.ShimmerCardItem
+import ru.melnikov.swapiapp.presentation.components.MainPlanetContent
+import ru.melnikov.swapiapp.presentation.components.PlanetLoader
 import ru.melnikov.swapiapp.presentation.components.TopBar
-import ru.melnikov.swapiapp.presentation.state.PeopleSideEffects
-import ru.melnikov.swapiapp.presentation.state.PeopleState
-import ru.melnikov.swapiapp.presentation.viewmodels.PeopleViewModel
+import ru.melnikov.swapiapp.presentation.state.PlanetSideEffects
+import ru.melnikov.swapiapp.presentation.state.PlanetState
+import ru.melnikov.swapiapp.presentation.viewmodels.PlanetViewModel
 
 @Composable
-fun PeopleScreen(
-    viewModel: PeopleViewModel = koinViewModel(),
-    navigateBack: () -> Unit,
-    onPlanetNavigate: (Int) -> Unit
+fun PlanetScreen(
+    viewModel: PlanetViewModel = koinViewModel(),
+    navigateBack: () -> Unit
 ) {
 
     val state by viewModel.container.stateFlow.collectAsState()
-
     val snackbarHostState = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
 
     viewModel.collectSideEffect {
         when (it) {
-            is PeopleSideEffects.NavigateToPlanet -> {
-                onPlanetNavigate(it.planetId)
-            }
+            is PlanetSideEffects.NavigateBack -> navigateBack()
 
-            is PeopleSideEffects.NavigateBack -> navigateBack()
-
-            is PeopleSideEffects.ShowError -> {
+            is PlanetSideEffects.ShowError -> {
                 scope.launch {
                     snackbarHostState.showSnackbar(it.text)
                 }
@@ -60,36 +54,28 @@ fun PeopleScreen(
         }
     }
 
-    val swipeRefreshState = rememberSwipeRefreshState(
-        isRefreshing = state.isLoading
-    )
-
-    PeopleScreenContent(
+    PlanetScreenContent(
         state = state,
-        onRefreshSwipe = viewModel::getPeople,
-        swipeRefreshState = swipeRefreshState,
         snackbarHostState = snackbarHostState,
         navigateBack = viewModel::navigateBack,
-        onItemClick = viewModel::navigateToPlanet
+        updateScreen = viewModel::getPlanet
     )
-
 }
 
 @Composable
-fun PeopleScreenContent(
-    state: PeopleState,
-    onRefreshSwipe: (Boolean) -> Unit,
-    swipeRefreshState: SwipeRefreshState,
+fun PlanetScreenContent(
+    state: PlanetState,
     snackbarHostState: SnackbarHostState,
     navigateBack: () -> Unit,
-    onItemClick: (Int) -> Unit
+    updateScreen: (Boolean) -> Unit
 ) {
+
     Scaffold(
         modifier = Modifier
             .fillMaxSize(),
         topBar = {
             TopBar(
-                title = state.filmTitle,
+                title = stringResource(id = R.string.planet_info),
                 navigateBack = navigateBack
             )
         },
@@ -102,8 +88,8 @@ fun PeopleScreenContent(
             Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
+                .verticalScroll(rememberScrollState())
         ) {
-
             AnimatedContent(
                 targetState = state,
                 transitionSpec = {
@@ -116,31 +102,23 @@ fun PeopleScreenContent(
                 label = ""
             ) { targetState ->
                 when {
-                    targetState.isLoading && targetState.people.isEmpty() -> {
-                        Column(modifier = Modifier.fillMaxSize()) {
-                            repeat(6) {
-                                ShimmerCardItem()
-                            }
-                        }
+                    targetState.isLoading && targetState.planet == null -> {
+                        PlanetLoader()
                     }
 
-                    !targetState.isLoading && targetState.people.isEmpty() -> {
+                    !targetState.isLoading && targetState.planet == null -> {
                         EmptyContent(
                             text = stringResource(id = R.string.empty_data),
-                            onBtnRepeatSearchClick = { onRefreshSwipe(true) })
+                            onBtnRepeatSearchClick = { updateScreen(true) })
                     }
 
                     else -> {
-                        MainPeopleContent(
-                            onRefreshSwipe = onRefreshSwipe,
-                            swipeRefreshState = swipeRefreshState,
-                            people = state.people,
-                            onItemClick = onItemClick
-                        )
+                        state.planet?.let {
+                            MainPlanetContent(planet = it)
+                        }
                     }
                 }
             }
-
         }
     }
 }

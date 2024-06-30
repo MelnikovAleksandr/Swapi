@@ -69,4 +69,8 @@ class PeopleViewModel(
         postSideEffect(PeopleSideEffects.NavigateBack)
     }
 
+    fun navigateToPlanet(planetId: Int) = intent {
+        postSideEffect(PeopleSideEffects.NavigateToPlanet(planetId))
+    }
+
 }

@@ -11,5 +11,8 @@ fun PersonDto.toPersonEntity() =
         birthYear = birthYear ?: "",
         urlId = url.toUri()
             .lastPathSegment
+            ?.toInt() ?: 0,
+        homeWorld = homeWorld?.toUri()
+            ?.lastPathSegment
             ?.toInt() ?: 0
     )

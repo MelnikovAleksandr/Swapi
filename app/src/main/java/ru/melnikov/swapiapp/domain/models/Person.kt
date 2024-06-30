@@ -6,5 +6,6 @@ data class Person(
     val id: Int,
     val name: String,
     val gender: Gender,
-    val birthYear: String
+    val birthYear: String,
+    val homeWorld: Int
 )

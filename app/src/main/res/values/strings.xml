@@ -14,6 +14,12 @@
     <string name="male_gender">Male</string>
     <string name="female_gender">Female</string>
 
+    <string name="planet_info">Planet info</string>
+    <string name="diameter">Diameter: </string>
+    <string name="climate">Climate: </string>
+    <string name="gravity">Gravity: </string>
+    <string name="terrain">Terrain: </string>
+    <string name="population">Population: </string>
 
     <string name="http_400_errors">Incorrect request.</string>
     <string name="http_429_error">The request limit has been exceeded, try again in a minute.</string>

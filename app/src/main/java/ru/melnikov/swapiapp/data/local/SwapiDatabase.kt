@@ -8,16 +8,19 @@ import androidx.room.TypeConverters
 import ru.melnikov.swapiapp.data.local.converters.Converters
 import ru.melnikov.swapiapp.data.local.dao.FilmDao
 import ru.melnikov.swapiapp.data.local.dao.PersonDao
+import ru.melnikov.swapiapp.data.local.dao.PlanetDao
 import ru.melnikov.swapiapp.data.local.entity.FilmEntity
 import ru.melnikov.swapiapp.data.local.entity.FilmPersonCrossRef
 import ru.melnikov.swapiapp.data.local.entity.FilmWithPeople
 import ru.melnikov.swapiapp.data.local.entity.PersonEntity
+import ru.melnikov.swapiapp.data.local.entity.PlanetEntity
 
 @Database(
     entities = [
         FilmEntity::class,
         FilmPersonCrossRef::class,
-        PersonEntity::class
+        PersonEntity::class,
+        PlanetEntity::class
     ],
     version = 1
 )
@@ -27,6 +30,8 @@ abstract class SwapiDatabase : RoomDatabase() {
     abstract fun filmDao(): FilmDao
 
     abstract fun personDao(): PersonDao
+
+    abstract fun planetDao(): PlanetDao
 
     companion object {
         private const val DATABASE_NAME = "swapi_database"
